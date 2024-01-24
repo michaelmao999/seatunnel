@@ -229,6 +229,7 @@ public class JdbcOracleIT extends AbstractJdbcIT {
         catalog =
                 new OracleCatalog(
                         "oracle",
+                        jdbcCase.getDriverClass(),
                         jdbcCase.getUserName(),
                         jdbcCase.getPassword(),
                         OracleURLParser.parse(jdbcUrl),

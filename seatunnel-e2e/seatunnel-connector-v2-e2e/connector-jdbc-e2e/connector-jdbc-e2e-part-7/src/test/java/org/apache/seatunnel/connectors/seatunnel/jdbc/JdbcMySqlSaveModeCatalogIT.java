@@ -154,7 +154,7 @@ public class JdbcMySqlSaveModeCatalogIT extends TestSuiteBase implements TestRes
     public void testCatalog() {
         TablePath tablePathMySql = TablePath.of("auto", "mysql_auto_create");
         TablePath tablePathMySql_Sink = TablePath.of("auto", "mysql_auto_create_sink");
-        MySqlCatalog mySqlCatalog = new MySqlCatalog("mysql", "root", MYSQL_PASSWORD, MysqlUrlInfo);
+        MySqlCatalog mySqlCatalog = new MySqlCatalog("mysql", MySqlCatalog.JDBC_DRIVER,"root", MYSQL_PASSWORD, MysqlUrlInfo);
         mySqlCatalog.open();
         CatalogTable catalogTable = mySqlCatalog.getTable(tablePathMySql);
         // sink tableExists ?
