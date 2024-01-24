@@ -18,13 +18,13 @@
 package org.apache.seatunnel.plugin.discovery.seatunnel;
 
 import org.apache.seatunnel.api.table.factory.Factory;
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 import org.apache.seatunnel.plugin.discovery.AbstractPluginDiscovery;
 import org.apache.seatunnel.plugin.discovery.PluginIdentifier;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
-import java.util.ServiceLoader;
 import java.util.function.BiConsumer;
 
 public class SeaTunnelFactoryDiscovery extends AbstractPluginDiscovery<Factory> {
@@ -51,8 +51,8 @@ public class SeaTunnelFactoryDiscovery extends AbstractPluginDiscovery<Factory> 
     @Override
     protected Factory loadPluginInstance(
             PluginIdentifier pluginIdentifier, ClassLoader classLoader) {
-        ServiceLoader<Factory> serviceLoader =
-                ServiceLoader.load(getPluginBaseClass(), classLoader);
+        EnhancedServiceLoader<Factory> serviceLoader =
+                EnhancedServiceLoader.load(getPluginBaseClass(), classLoader);
         for (Factory factory : serviceLoader) {
             if (factoryClass.isInstance(factory)) {
                 String factoryIdentifier = factory.factoryIdentifier();

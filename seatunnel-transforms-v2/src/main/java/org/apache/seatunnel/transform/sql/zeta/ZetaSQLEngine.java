@@ -21,6 +21,7 @@ import org.apache.seatunnel.api.table.type.SeaTunnelDataType;
 import org.apache.seatunnel.api.table.type.SeaTunnelRow;
 import org.apache.seatunnel.api.table.type.SeaTunnelRowType;
 import org.apache.seatunnel.common.exception.CommonErrorCodeDeprecated;
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 import org.apache.seatunnel.transform.exception.TransformException;
 import org.apache.seatunnel.transform.sql.SQLEngine;
 
@@ -42,7 +43,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
 public class ZetaSQLEngine implements SQLEngine {
@@ -74,7 +74,7 @@ public class ZetaSQLEngine implements SQLEngine {
 
         List<ZetaUDF> udfList = new ArrayList<>();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        ServiceLoader.load(ZetaUDF.class, classLoader).forEach(udfList::add);
+        EnhancedServiceLoader.load(ZetaUDF.class, classLoader).forEach(udfList::add);
 
         this.zetaSQLType = new ZetaSQLType(inputRowType, udfList);
         this.zetaSQLFunction = new ZetaSQLFunction(inputRowType, zetaSQLType, udfList);

@@ -41,11 +41,12 @@ public class OceanBaseOracleCatalog extends OracleCatalog {
 
     public OceanBaseOracleCatalog(
             String catalogName,
+            String driverName,
             String username,
             String pwd,
             JdbcUrlUtil.UrlInfo urlInfo,
             String defaultSchema) {
-        super(catalogName, username, pwd, urlInfo, defaultSchema);
+        super(catalogName, driverName, username, pwd, urlInfo, defaultSchema);
     }
 
     @Override

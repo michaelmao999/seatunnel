@@ -35,6 +35,7 @@ import org.apache.seatunnel.api.table.connector.TableSource;
 import org.apache.seatunnel.api.table.type.SeaTunnelDataType;
 import org.apache.seatunnel.api.transform.SeaTunnelTransform;
 
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +50,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.ServiceConfigurationError;
-import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
 /**
@@ -248,7 +248,7 @@ public final class FactoryUtil {
     public static List<Factory> discoverFactories(ClassLoader classLoader) {
         try {
             final List<Factory> result = new LinkedList<>();
-            ServiceLoader.load(Factory.class, classLoader).iterator().forEachRemaining(result::add);
+            EnhancedServiceLoader.load(Factory.class, classLoader).iterator().forEachRemaining(result::add);
             return result;
         } catch (ServiceConfigurationError e) {
             LOG.error("Could not load service provider for factories.", e);

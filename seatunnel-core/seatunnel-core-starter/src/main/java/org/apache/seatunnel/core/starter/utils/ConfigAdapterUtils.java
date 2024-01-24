@@ -24,20 +24,20 @@ import org.apache.commons.lang3.StringUtils;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.ServiceLoader;
 
 @Slf4j
 public final class ConfigAdapterUtils {
     private static final List<ConfigAdapter> CONFIG_ADAPTERS = new ArrayList<>(0);
 
     static {
-        ServiceLoader<ConfigAdapter> serviceLoader = ServiceLoader.load(ConfigAdapter.class);
+        EnhancedServiceLoader<ConfigAdapter> serviceLoader = EnhancedServiceLoader.load(ConfigAdapter.class);
         Iterator<ConfigAdapter> it = serviceLoader.iterator();
         it.forEachRemaining(CONFIG_ADAPTERS::add);
     }

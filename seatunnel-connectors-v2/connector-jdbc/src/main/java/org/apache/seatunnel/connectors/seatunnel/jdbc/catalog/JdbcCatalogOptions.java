@@ -30,6 +30,13 @@ public interface JdbcCatalogOptions {
                             "URL has to be with database, like \"jdbc:mysql://localhost:5432/db\" or"
                                     + "\"jdbc:mysql://localhost:5432/db?useSSL=true\".");
 
+    Option<String> JDBC_DRIVER =
+            Options.key("driverName")
+                    .stringType()
+                    .noDefaultValue()
+                    .withDescription(
+                            "URL has to be with database, like \"com.mysql.cj.jdbc.Driver\" .");
+
     Option<String> USERNAME =
             Options.key("username")
                     .stringType()

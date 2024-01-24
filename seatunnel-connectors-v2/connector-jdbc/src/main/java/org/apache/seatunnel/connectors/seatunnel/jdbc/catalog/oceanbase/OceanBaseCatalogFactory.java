@@ -63,6 +63,7 @@ public class OceanBaseCatalogFactory implements CatalogFactory {
         if ("oracle".equalsIgnoreCase(compatibleMode.trim())) {
             return new OceanBaseOracleCatalog(
                     catalogName,
+                    options.get(JdbcCatalogOptions.JDBC_DRIVER),
                     options.get(JdbcCatalogOptions.USERNAME),
                     options.get(JdbcCatalogOptions.PASSWORD),
                     urlInfo,
@@ -70,6 +71,7 @@ public class OceanBaseCatalogFactory implements CatalogFactory {
         }
         return new OceanBaseMySqlCatalog(
                 catalogName,
+                options.get(JdbcCatalogOptions.JDBC_DRIVER),
                 options.get(JdbcCatalogOptions.USERNAME),
                 options.get(JdbcCatalogOptions.PASSWORD),
                 urlInfo);

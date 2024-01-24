@@ -49,6 +49,7 @@ public class TiDBCatalogFactory implements CatalogFactory {
         }
         return new TiDBCatalog(
                 catalogName,
+                options.get(JdbcCatalogOptions.JDBC_DRIVER),
                 options.get(JdbcCatalogOptions.USERNAME),
                 options.get(JdbcCatalogOptions.PASSWORD),
                 urlInfo);

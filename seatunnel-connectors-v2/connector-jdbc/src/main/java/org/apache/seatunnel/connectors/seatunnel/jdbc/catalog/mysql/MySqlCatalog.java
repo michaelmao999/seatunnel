@@ -43,6 +43,9 @@ import java.util.Map;
 @Slf4j
 public class MySqlCatalog extends AbstractJdbcCatalog {
 
+
+    public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+
     private static final MysqlDataTypeConvertor DATA_TYPE_CONVERTOR = new MysqlDataTypeConvertor();
 
     private static final String SELECT_COLUMNS_SQL_TEMPLATE =
@@ -56,8 +59,8 @@ public class MySqlCatalog extends AbstractJdbcCatalog {
     }
 
     public MySqlCatalog(
-            String catalogName, String username, String pwd, JdbcUrlUtil.UrlInfo urlInfo) {
-        super(catalogName, username, pwd, urlInfo, null);
+            String catalogName, String driverName, String username, String pwd, JdbcUrlUtil.UrlInfo urlInfo) {
+        super(catalogName, driverName, username, pwd, urlInfo, null);
     }
 
     @Override

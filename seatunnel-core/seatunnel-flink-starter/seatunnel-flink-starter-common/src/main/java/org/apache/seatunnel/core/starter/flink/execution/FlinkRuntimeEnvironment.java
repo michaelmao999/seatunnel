@@ -338,11 +338,11 @@ public class FlinkRuntimeEnvironment implements RuntimeEnvironment {
         StreamTableEnvironment tableEnvironment = this.getStreamTableEnvironment();
         if (!TableUtil.tableExists(tableEnvironment, name)) {
             if (isAppend) {
-                if (config.hasPath("field_name")) {
-                    String fieldName = config.getString("field_name");
-                    tableEnvironment.registerDataStream(name, dataStream, fieldName);
-                    return;
-                }
+//                if (config.hasPath("field_name")) {
+//                    String fieldName = config.getString("field_name");
+//                    tableEnvironment.registerDataStream(name, dataStream, fieldName);
+//                    return;
+//                }
                 tableEnvironment.registerDataStream(name, dataStream);
                 return;
             }

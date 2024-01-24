@@ -17,6 +17,7 @@
 
 package org.apache.seatunnel.connectors.seatunnel.jdbc.internal.dialect;
 
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 import org.apache.seatunnel.connectors.seatunnel.jdbc.exception.JdbcConnectorErrorCode;
 import org.apache.seatunnel.connectors.seatunnel.jdbc.exception.JdbcConnectorException;
 
@@ -26,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ServiceConfigurationError;
-import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
 /** Utility for working with {@link JdbcDialect}. */
@@ -100,7 +100,7 @@ public final class JdbcDialectLoader {
     private static List<JdbcDialectFactory> discoverFactories(ClassLoader classLoader) {
         try {
             final List<JdbcDialectFactory> result = new LinkedList<>();
-            ServiceLoader.load(JdbcDialectFactory.class, classLoader)
+            EnhancedServiceLoader.load(JdbcDialectFactory.class, classLoader)
                     .iterator()
                     .forEachRemaining(result::add);
             return result;

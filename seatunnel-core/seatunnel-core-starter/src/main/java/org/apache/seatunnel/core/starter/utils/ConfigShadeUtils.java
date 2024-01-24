@@ -17,6 +17,7 @@
 
 package org.apache.seatunnel.core.starter.utils;
 
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 import org.apache.seatunnel.shade.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.seatunnel.shade.com.google.common.base.Preconditions;
 import org.apache.seatunnel.shade.com.typesafe.config.Config;
@@ -31,14 +32,8 @@ import org.apache.seatunnel.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.ServiceLoader;
+import java.util.*;
+
 import java.util.function.BiFunction;
 
 /** Config shade utilities */
@@ -55,7 +50,7 @@ public final class ConfigShadeUtils {
     private static final ConfigShade DEFAULT_SHADE = new DefaultConfigShade();
 
     static {
-        ServiceLoader<ConfigShade> serviceLoader = ServiceLoader.load(ConfigShade.class);
+        EnhancedServiceLoader<ConfigShade> serviceLoader = EnhancedServiceLoader.load(ConfigShade.class);
         Iterator<ConfigShade> it = serviceLoader.iterator();
         it.forEachRemaining(
                 configShade -> {

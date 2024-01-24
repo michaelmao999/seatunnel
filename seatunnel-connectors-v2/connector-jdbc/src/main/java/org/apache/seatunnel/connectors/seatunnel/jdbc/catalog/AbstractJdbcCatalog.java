@@ -72,6 +72,8 @@ public abstract class AbstractJdbcCatalog implements Catalog {
     protected final String username;
     protected final String pwd;
     protected final String baseUrl;
+
+    protected String driverName;
     protected final String suffix;
     protected final String defaultUrl;
 
@@ -81,6 +83,7 @@ public abstract class AbstractJdbcCatalog implements Catalog {
 
     public AbstractJdbcCatalog(
             String catalogName,
+            String driverName,
             String username,
             String pwd,
             JdbcUrlUtil.UrlInfo urlInfo,
@@ -89,6 +92,7 @@ public abstract class AbstractJdbcCatalog implements Catalog {
         checkArgument(StringUtils.isNotBlank(username));
         checkArgument(StringUtils.isNotBlank(urlInfo.getUrlWithoutDatabase()));
         this.catalogName = catalogName;
+        this.driverName = driverName;
         this.defaultDatabase = urlInfo.getDefaultDatabase().orElse(null);
         this.username = username;
         this.pwd = pwd;
@@ -114,11 +118,16 @@ public abstract class AbstractJdbcCatalog implements Catalog {
             return connectionMap.get(url);
         }
         try {
+            if (driverName != null) {
+                Class.forName(driverName);
+            }
             Connection connection = DriverManager.getConnection(url, username, pwd);
             connectionMap.put(url, connection);
             return connection;
         } catch (SQLException e) {
             throw new CatalogException(String.format("Failed connecting to %s via JDBC.", url), e);
+        } catch (ClassNotFoundException e) {
+            throw new CatalogException(String.format("Failed getting JDBC driver %s.", driverName), e);
         }
     }
 

@@ -49,6 +49,7 @@ public class PostgresCatalogFactory implements CatalogFactory {
         }
         return new PostgresCatalog(
                 catalogName,
+                options.get(JdbcCatalogOptions.JDBC_DRIVER),
                 options.get(JdbcCatalogOptions.USERNAME),
                 options.get(JdbcCatalogOptions.PASSWORD),
                 urlInfo,

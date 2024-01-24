@@ -18,10 +18,11 @@
 package org.apache.seatunnel.api.table.factory;
 
 import org.apache.seatunnel.api.table.catalog.DataTypeConvertor;
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ServiceLoader;
+
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,7 +35,7 @@ public class DataTypeConvertorFactory {
     }
 
     public DataTypeConvertorFactory(ClassLoader classLoader) {
-        ServiceLoader.load(DataTypeConvertor.class, classLoader)
+        EnhancedServiceLoader.load(DataTypeConvertor.class, classLoader)
                 .forEach(
                         dataTypeConvertor -> {
                             dataTypeConvertorMap.put(

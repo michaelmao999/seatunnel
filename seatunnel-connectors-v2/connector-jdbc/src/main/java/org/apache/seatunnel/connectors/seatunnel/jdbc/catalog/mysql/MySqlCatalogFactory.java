@@ -49,6 +49,7 @@ public class MySqlCatalogFactory implements CatalogFactory {
         JdbcUrlUtil.UrlInfo urlInfo = JdbcUrlUtil.getUrlInfo(urlWithDatabase);
         return new MySqlCatalog(
                 catalogName,
+                options.get(JdbcCatalogOptions.JDBC_DRIVER),
                 options.get(JdbcCatalogOptions.USERNAME),
                 options.get(JdbcCatalogOptions.PASSWORD),
                 urlInfo);

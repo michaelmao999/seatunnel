@@ -17,6 +17,7 @@
 
 package org.apache.seatunnel.e2e.common.util;
 
+import org.apache.seatunnel.common.service.EnhancedServiceLoader;
 import org.apache.seatunnel.shade.com.typesafe.config.Config;
 import org.apache.seatunnel.shade.com.typesafe.config.ConfigFactory;
 import org.apache.seatunnel.shade.com.typesafe.config.ConfigResolveOptions;
@@ -42,7 +43,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ServiceConfigurationError;
-import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -236,7 +236,7 @@ public final class ContainerUtil {
     public static List<TestContainer> discoverTestContainers() {
         try {
             final List<TestContainer> result = new LinkedList<>();
-            ServiceLoader.load(TestContainer.class, Thread.currentThread().getContextClassLoader())
+            EnhancedServiceLoader.load(TestContainer.class, Thread.currentThread().getContextClassLoader())
                     .iterator()
                     .forEachRemaining(result::add);
             return result;

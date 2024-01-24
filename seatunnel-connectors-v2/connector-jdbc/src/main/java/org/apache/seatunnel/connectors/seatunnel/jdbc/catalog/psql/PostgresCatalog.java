@@ -53,6 +53,8 @@ import static org.apache.seatunnel.connectors.seatunnel.jdbc.catalog.psql.Postgr
 @Slf4j
 public class PostgresCatalog extends AbstractJdbcCatalog {
 
+    public static final String JDBC_DRIVER = "org.postgresql.Driver";
+
     private static final PostgresDataTypeConvertor DATA_TYPE_CONVERTOR =
             new PostgresDataTypeConvertor();
 
@@ -107,11 +109,12 @@ public class PostgresCatalog extends AbstractJdbcCatalog {
 
     public PostgresCatalog(
             String catalogName,
+            String driverName,
             String username,
             String pwd,
             JdbcUrlUtil.UrlInfo urlInfo,
             String defaultSchema) {
-        super(catalogName, username, pwd, urlInfo, defaultSchema);
+        super(catalogName, driverName, username, pwd, urlInfo, defaultSchema);
     }
 
     @Override

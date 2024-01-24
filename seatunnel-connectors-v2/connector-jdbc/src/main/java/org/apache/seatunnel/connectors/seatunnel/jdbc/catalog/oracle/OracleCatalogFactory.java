@@ -49,6 +49,7 @@ public class OracleCatalogFactory implements CatalogFactory {
         }
         return new OracleCatalog(
                 catalogName,
+                options.get(JdbcCatalogOptions.JDBC_DRIVER),
                 options.get(JdbcCatalogOptions.USERNAME),
                 options.get(JdbcCatalogOptions.PASSWORD),
                 urlInfo,

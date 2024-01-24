@@ -44,6 +44,9 @@ import java.util.Map;
 @Slf4j
 public class SqlServerCatalog extends AbstractJdbcCatalog {
 
+
+    public static final String JDBC_DRIVER = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
+
     private static final SqlServerDataTypeConvertor DATA_TYPE_CONVERTOR =
             new SqlServerDataTypeConvertor();
 
@@ -68,11 +71,12 @@ public class SqlServerCatalog extends AbstractJdbcCatalog {
 
     public SqlServerCatalog(
             String catalogName,
+            String driverName,
             String username,
             String pwd,
             JdbcUrlUtil.UrlInfo urlInfo,
             String defaultSchema) {
-        super(catalogName, username, pwd, urlInfo, defaultSchema);
+        super(catalogName, driverName, username, pwd, urlInfo, defaultSchema);
     }
 
     @Override

@@ -61,6 +61,7 @@ import static org.apache.seatunnel.connectors.seatunnel.jdbc.catalog.oracle.Orac
 @Slf4j
 public class OracleCatalog extends AbstractJdbcCatalog {
 
+    public static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final OracleDataTypeConvertor DATA_TYPE_CONVERTOR =
             new OracleDataTypeConvertor();
 
@@ -120,11 +121,12 @@ public class OracleCatalog extends AbstractJdbcCatalog {
 
     public OracleCatalog(
             String catalogName,
+            String driverName,
             String username,
             String pwd,
             JdbcUrlUtil.UrlInfo urlInfo,
             String defaultSchema) {
-        super(catalogName, username, pwd, urlInfo, defaultSchema);
+        super(catalogName, driverName, username, pwd, urlInfo, defaultSchema);
     }
 
     @Override

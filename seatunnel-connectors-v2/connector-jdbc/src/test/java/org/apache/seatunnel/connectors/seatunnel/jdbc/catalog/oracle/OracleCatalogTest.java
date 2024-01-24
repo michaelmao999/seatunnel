@@ -29,9 +29,11 @@ import java.util.List;
 class OracleCatalogTest {
     @Test
     void testCatalog() {
+
         OracleCatalog catalog =
                 new OracleCatalog(
                         "oracle",
+                        OracleCatalog.JDBC_DRIVER,
                         "test",
                         "oracle",
                         OracleURLParser.parse("jdbc:oracle:thin:@127.0.0.1:1521:xe"),
