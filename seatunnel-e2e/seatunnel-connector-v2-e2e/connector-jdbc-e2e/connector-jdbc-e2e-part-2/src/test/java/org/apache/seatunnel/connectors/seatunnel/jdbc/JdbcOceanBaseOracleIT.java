@@ -210,6 +210,7 @@ public class JdbcOceanBaseOracleIT extends JdbcOceanBaseITBase {
         catalog =
                 new OceanBaseOracleCatalog(
                         "oceanbase",
+                        OceanBaseOracleCatalog.DRIVER_CLASS,
                         USERNAME,
                         PASSWORD,
                         JdbcUrlUtil.getUrlInfo(jdbcCase.getJdbcUrl().replace(HOST, HOSTNAME)),

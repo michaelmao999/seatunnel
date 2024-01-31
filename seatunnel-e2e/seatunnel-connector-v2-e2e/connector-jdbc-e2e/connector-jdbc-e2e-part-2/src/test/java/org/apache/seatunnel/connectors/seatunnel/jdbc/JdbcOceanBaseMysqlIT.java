@@ -293,6 +293,7 @@ public class JdbcOceanBaseMysqlIT extends JdbcOceanBaseITBase {
         catalog =
                 new OceanBaseMySqlCatalog(
                         "oceanbase",
+                        OceanBaseMySqlCatalog.DRIVER_CLASS,
                         USERNAME,
                         PASSWORD,
                         JdbcUrlUtil.getUrlInfo(

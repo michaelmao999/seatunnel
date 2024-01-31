@@ -16,22 +16,17 @@
  */
 package org.apache.seatunnel.core.starter.flink;
 
-import org.apache.flink.configuration.Configuration;
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.seatunnel.common.config.DeployMode;
 import org.apache.seatunnel.core.starter.exception.CommandExecuteException;
 import org.apache.seatunnel.core.starter.flink.args.FlinkCommandArgs;
 import org.apache.seatunnel.core.starter.flink.execution.FlinkExecution;
-import org.apache.seatunnel.core.starter.flink.utils.EnvironmentUtil;
+
 import org.apache.seatunnel.core.starter.utils.ConfigBuilder;
 import org.apache.seatunnel.core.starter.utils.FileUtils;
 import org.apache.seatunnel.shade.com.typesafe.config.Config;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestFlinkMysql {
 

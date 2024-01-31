@@ -33,6 +33,8 @@ import static org.apache.seatunnel.shade.com.google.common.base.Preconditions.ch
 
 public class OceanBaseOracleCatalog extends OracleCatalog {
 
+    public static final String DRIVER_CLASS = "com.alipay.oceanbase.jdbc.Drive";
+
     static {
         EXCLUDED_SCHEMAS =
                 Collections.unmodifiableList(

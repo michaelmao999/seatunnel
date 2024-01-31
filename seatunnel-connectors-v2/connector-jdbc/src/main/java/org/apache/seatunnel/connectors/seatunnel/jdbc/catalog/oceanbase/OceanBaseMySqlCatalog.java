@@ -22,6 +22,8 @@ import org.apache.seatunnel.connectors.seatunnel.jdbc.catalog.mysql.MySqlCatalog
 
 public class OceanBaseMySqlCatalog extends MySqlCatalog {
 
+    public static final String DRIVER_CLASS = "com.alipay.oceanbase.jdbc.Drive";
+
     static {
         SYS_DATABASES.clear();
         SYS_DATABASES.add("information_schema");
