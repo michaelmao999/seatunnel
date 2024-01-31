@@ -278,6 +278,7 @@ public class JdbcPostgresIT extends TestSuiteBase implements TestResource {
         Catalog catalog =
                 new PostgresCatalog(
                         DatabaseIdentifier.POSTGRESQL,
+                        PostgresCatalog.JDBC_DRIVER,
                         POSTGRESQL_CONTAINER.getUsername(),
                         POSTGRESQL_CONTAINER.getPassword(),
                         JdbcUrlUtil.getUrlInfo(POSTGRESQL_CONTAINER.getJdbcUrl()),
@@ -459,6 +460,7 @@ public class JdbcPostgresIT extends TestSuiteBase implements TestResource {
         PostgresCatalog postgresCatalog =
                 new PostgresCatalog(
                         DatabaseIdentifier.POSTGRESQL,
+                        PostgresCatalog.JDBC_DRIVER,
                         POSTGRESQL_CONTAINER.getUsername(),
                         POSTGRESQL_CONTAINER.getPassword(),
                         JdbcUrlUtil.getUrlInfo(POSTGRESQL_CONTAINER.getJdbcUrl()),

@@ -280,10 +280,13 @@ public class JdbcSqlServerCreateTableIT extends TestSuiteBase implements TestRes
         TablePath tablePathPG = TablePath.of("pg", "public", "sqlserver_auto_create_pg");
 
         SqlServerCatalog sqlServerCatalog =
-                new SqlServerCatalog("sqlserver", "sa", password, sqlParse, "dbo");
-        MySqlCatalog mySqlCatalog = new MySqlCatalog("mysql", "root", PASSWORD, MysqlUrlInfo);
+                new SqlServerCatalog("sqlserver", SqlServerCatalog.JDBC_DRIVER,
+                        "sa", password, sqlParse, "dbo");
+        MySqlCatalog mySqlCatalog = new MySqlCatalog("mysql", MySqlCatalog.JDBC_DRIVER,
+                "root", PASSWORD, MysqlUrlInfo);
         PostgresCatalog postgresCatalog =
-                new PostgresCatalog("postgres", "testUser", PASSWORD, pg, "public");
+                new PostgresCatalog("postgres", PostgresCatalog.JDBC_DRIVER,
+                        "testUser", PASSWORD, pg, "public");
 
         mySqlCatalog.open();
         sqlServerCatalog.open();

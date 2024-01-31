@@ -324,6 +324,7 @@ public class JdbcSqlServerIT extends AbstractJdbcIT {
         catalog =
                 new SqlServerCatalog(
                         "sqlserver",
+                        SqlServerCatalog.JDBC_DRIVER,
                         jdbcCase.getUserName(),
                         jdbcCase.getPassword(),
                         SqlServerURLParser.parse(
