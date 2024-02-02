@@ -27,6 +27,7 @@ public class EnhancedServiceLoader<S>
     // Cached providers, in instantiation order
     private LinkedHashMap<String,S> providers = new LinkedHashMap<>();
 
+    private static final Map<String, Map<String, List<String>>> cachedServiceNames = new HashMap<>();
     // The current lazy-lookup iterator
     private LazyIterator lookupIterator;
 
@@ -179,6 +180,8 @@ public class EnhancedServiceLoader<S>
         Class<S> service;
         ClassLoader loader;
         Enumeration<URL> configs = null;
+
+        List<String> nameList = null;
         Iterator<String> pending = null;
         String nextName = null;
 
@@ -191,13 +194,22 @@ public class EnhancedServiceLoader<S>
             if (nextName != null) {
                 return true;
             }
+            String fullName = null;
             if (configs == null) {
                 try {
-                    String fullName = PREFIX + service.getName();
-                    if (loader == null)
+                    fullName = PREFIX + service.getName();
+                    if (loader == null) {
                         configs = ClassLoader.getSystemResources(fullName);
-                    else
-                        configs = loader.getResources(fullName);
+                    } else {
+                        List<String> names = getCachedNames(fullName, loader);
+                        if (names == null) {
+                            configs = loader.getResources(fullName);
+                        } else if (pending == null){
+                            pending = names.iterator();
+                            nextName = pending.next();
+                            return true;
+                        }
+                    }
                 } catch (IOException x) {
                     fail(service, "Error locating configuration files", x);
                 }
@@ -213,6 +225,8 @@ public class EnhancedServiceLoader<S>
                 if (names.isEmpty()) {
                     return false;
                 }
+                putCachedNames(fullName, loader, names);
+                nameList = names;
                 pending = names.iterator();
             }
             if (pending.hasNext()) {
@@ -221,6 +235,35 @@ public class EnhancedServiceLoader<S>
             } else {
                 return false;
             }
+        }
+
+        private List<String> getCachedNames(String fullName, ClassLoader loader) {
+            if (loader == null) {
+                return null;
+            }
+            Map<String, List<String>> cachedNameMap = cachedServiceNames.get(fullName);
+            if (cachedNameMap != null) {
+                String loaderKey = loader.toString();
+                List<String> names = cachedNameMap.get(loaderKey);
+                if (names == null || names.isEmpty()) {
+                    return null;
+                }
+                return names;
+            }
+            return null;
+        }
+
+        private void putCachedNames(String fullName, ClassLoader loader, List<String> names) {
+            if (fullName == null || loader == null || names.isEmpty()) {
+                return;
+            }
+            Map<String, List<String>> cachedNameMap = cachedServiceNames.get(fullName);
+            if (cachedNameMap == null) {
+                cachedNameMap = new HashMap<>();
+                cachedServiceNames.put(fullName, cachedNameMap);
+            }
+            String loaderKey = loader.toString();
+            cachedNameMap.put(loaderKey, names);
         }
 
         private S nextService() {
